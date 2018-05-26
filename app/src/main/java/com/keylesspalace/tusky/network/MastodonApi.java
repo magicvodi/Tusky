@@ -33,6 +33,7 @@ import com.keylesspalace.tusky.entity.StatusContext;
 
 import java.util.List;
 
+import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -57,6 +58,12 @@ public interface MastodonApi {
 
     @GET("api/v1/timelines/home")
     Call<List<Status>> homeTimeline(
+            @Query("max_id") String maxId,
+            @Query("since_id") String sinceId,
+            @Query("limit") Integer limit);
+
+    @GET("api/v1/timelines/home")
+    Single<List<Status>> homeTimelineSingle(
             @Query("max_id") String maxId,
             @Query("since_id") String sinceId,
             @Query("limit") Integer limit);
